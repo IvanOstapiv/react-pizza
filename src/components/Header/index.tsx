@@ -7,10 +7,10 @@ import { selectCart } from '../../redux/Slices/cartSlice';
 import SearchInput from '../SearchInput';
 
 
-const Header = () => {
+const Header: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart);
 
-  const totalItem = items.reduce((sum, item) => sum + item.count, 0)
+  const totalItem = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
   return (
     <div className="header">

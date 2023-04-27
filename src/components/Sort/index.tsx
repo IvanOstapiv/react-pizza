@@ -1,31 +1,31 @@
 import React from 'react';
-import { setSortID } from '../../redux/Slices/filterSlice';
+import { selectFilter, setSortID } from '../../redux/Slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Sort = () => {
-  const sortID = useSelector(state => state.filterReducer.sortID);
-  const sortRef = React.useRef()
-  const dispatch = useDispatch()
-  const onClickPopup = (id) => {
+const Sort: React.FC = () => {
+  const { sortID } = useSelector(selectFilter);
+  const sortRef = React.useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
+  
+  const onClickPopup = (id: number) => {
     dispatch(setSortID(id));
-   }
+  };
   const [open, setOpen] = React.useState(false);
 
-  const sortName = ['популярности', 'цене', 'алфавиту'];
+  const sortName: string[] = ['популярности', 'цене', 'алфавиту'];
 
-   React.useEffect(() => {
-    const clickOutSide = (event) =>{
-      if(!event.composedPath().includes(sortRef.current)){
-        setOpen(false)
-        // console.log("clickOutSide");
+  React.useEffect(() => {
+    const clickOutSide = (event: any) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setOpen(false);
       }
-    }
+    };
 
-    document.body.addEventListener('click', clickOutSide)
+    document.body.addEventListener('click', clickOutSide);
     return () => {
-      document.body.removeEventListener('click', clickOutSide)
-    }
-   },[])
+      document.body.removeEventListener('click', clickOutSide);
+    };
+  }, []);
 
   return (
     <div ref={sortRef} className="sort">
@@ -48,10 +48,7 @@ const Sort = () => {
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
-              <li
-                key={i}
-                onClick={() => onClickPopup(i)}
-                className={sortID == i ? 'active' : ''}>
+              <li key={i} onClick={() => onClickPopup(i)} className={sortID == i ? 'active' : ''}>
                 {item}
               </li>
             ))}
@@ -60,6 +57,6 @@ const Sort = () => {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

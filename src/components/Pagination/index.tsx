@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './Pagination.module.scss';
 
-const Pagination = ({ value, onClickPagination }) => {
-  const paginElem = [1, 2, 3];
+type PaginationProps = {
+  value: number;
+  onClickPagination: any;
+}
+
+const Pagination: React.FC<PaginationProps> = ({ value, onClickPagination }) => {
+  const paginElem: number[] = [1, 2, 3];
 
   return (
     <ul className={styles.root}>

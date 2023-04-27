@@ -5,19 +5,14 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
+import FullPizza from './pages/FullPizza';
 
 import './scss/app.scss';
-import AppContext from '../context';
 
-const App = () => {
-
-  const [searchValue, setSearchValue] = React.useState('');
+const App: React.FC = () => {
 
   return (
-    <AppContext.Provider value={{ searchValue, setSearchValue }}>
       <div className="wrapper">
-
-
         <Header />
         <div className="content">
           <div className="container">
@@ -29,7 +24,6 @@ const App = () => {
           </div>
         </div>
       </div>
-    </AppContext.Provider>
   );
 }
 

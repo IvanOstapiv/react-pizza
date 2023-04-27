@@ -6,12 +6,12 @@ import styles from './Search.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, setSearchValue } from '../../redux/Slices/filterSlice';
 
-const SearchInput = () => {
+const SearchInput: React.FC = () => {
   const [value, setValue] = React.useState(''); //локальне змінення даних в пошуку
   const dispatch = useDispatch();
   const { searchValue } = useSelector(selectFilter);
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const updateSearchValue = React.useCallback(
       debounce((str) => {
@@ -19,14 +19,16 @@ const SearchInput = () => {
       }, 350),
       [],
   );
-  const onChangetoSearch = (event) => {
+  const onChangetoSearch = (event: any) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
   const inputDelete = () => {
     dispatch(setSearchValue('')); 
     setValue('');
-    inputRef.current.focus();
+    if(inputRef.current){
+      inputRef.current.focus();
+    }
   };
   return (
     <div className={styles.root}>

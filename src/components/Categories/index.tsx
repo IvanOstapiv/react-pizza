@@ -1,12 +1,12 @@
 import React from 'react';
 import AppContext from '../../../context';
 
-// type CategoriesProps = {
-//   value: string;
-//   onClickCategory: any;
-// }
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any;
+}
 
-const Categories= ({value, onClickCategory }) => {
+const Categories: React.FC<CategoriesProps> = ({value, onClickCategory }) => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 

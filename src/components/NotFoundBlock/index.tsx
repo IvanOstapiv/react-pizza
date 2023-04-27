@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './NotFoundBlock.module.scss';
 
-const NotFoundBlock = () => {
+const NotFoundBlock: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.contentBlock}>
