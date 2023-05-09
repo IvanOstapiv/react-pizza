@@ -3,7 +3,7 @@ import styles from './Pagination.module.scss';
 
 type PaginationProps = {
   value: number;
-  onClickPagination: any;
+  onClickPagination: (i: number) => void
 }
 
 const Pagination: React.FC<PaginationProps> = ({ value, onClickPagination }) => {

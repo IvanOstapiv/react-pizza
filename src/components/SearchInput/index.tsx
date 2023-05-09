@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 
@@ -14,21 +14,19 @@ const SearchInput: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateSearchValue = React.useCallback(
-      debounce((str) => {
-        dispatch(setSearchValue(str))
-      }, 350),
-      [],
+    debounce((str: string) => {
+      dispatch(setSearchValue(str));
+    }, 350),
+    [],
   );
-  const onChangetoSearch = (event: any) => {
+  const onChangetoSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
   const inputDelete = () => {
-    dispatch(setSearchValue('')); 
+    dispatch(setSearchValue(''));
     setValue('');
-    if(inputRef.current){
-      inputRef.current.focus();
-    }
+    inputRef.current?.focus();
   };
   return (
     <div className={styles.root}>
@@ -77,6 +75,6 @@ const SearchInput: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SearchInput;

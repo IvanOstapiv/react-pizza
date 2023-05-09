@@ -3,7 +3,7 @@ import AppContext from '../../../context';
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
+  onClickCategory: (index: number) => void;
 }
 
 const Categories: React.FC<CategoriesProps> = ({value, onClickCategory }) => {

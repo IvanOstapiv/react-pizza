@@ -15,9 +15,11 @@ const Sort: React.FC = () => {
   const sortName: string[] = ['популярности', 'цене', 'алфавиту'];
 
   React.useEffect(() => {
-    const clickOutSide = (event: any) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const clickOutSide = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
+        console.log(event);
+        
       }
     };
 

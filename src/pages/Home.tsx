@@ -70,7 +70,7 @@ const Home: React.FC = () => {
       </div>
       <Pagination
         value={selectPagination}
-        onClickPagination={(id: any) => setSelectPagination(id)}
+        onClickPagination={(id: number) => setSelectPagination(id)}
       />
     </>
   );
