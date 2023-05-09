@@ -9,11 +9,12 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
+import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
   const { categoryID, sortID, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizza);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
 
   const onClickCategory = (id: number) => {
     dispatch(setCategoryID(id)); //dispatch - заставляєм мінятися state categoryID
@@ -25,11 +26,10 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      console.log('sort = ' + sortType[sortID]); //&sortBy=${sortType[sort]}&order=asc
+      console.log('sort = ' + sortType[sortID]);
       console.log('category = ' + categoryID);
 
       dispatch(
-        //@ts-ignore
         fetchPizzas({
           selectPagination,
           categoryID,
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
         {status === 'loading'
           ? [...Array(6)].map((_, index) => <Skeleton key={index} />)
           : items
-              // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+              // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase())) 
               .map((pizza: any) => (
                 <PizzaBlock
                   key={pizza.id}

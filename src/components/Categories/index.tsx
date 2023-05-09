@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../../../context';
 
 type CategoriesProps = {
   value: number;
@@ -11,7 +10,6 @@ const Categories: React.FC<CategoriesProps> = ({value, onClickCategory }) => {
 
 
   return (
-    <AppContext.Provider value={{}}>
     <div className="categories">
       <ul>
         {categories.map((item, index) => (
@@ -24,7 +22,6 @@ const Categories: React.FC<CategoriesProps> = ({value, onClickCategory }) => {
         ))}
       </ul>
     </div>
-    </AppContext.Provider>
   );
 }
 
