@@ -67,7 +67,7 @@ const SearchInput: React.FC = () => {
           value={value}
           onChange={onChangetoSearch}
           className={styles.input}
-          placeholder="Поиск пиццы..."
+          placeholder="Пошук піцци..."
         />
         {searchValue && (
           <img onClick={inputDelete} width={20} height={20} src="./img/close.png" alt="clear"></img>

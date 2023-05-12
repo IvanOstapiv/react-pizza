@@ -12,7 +12,7 @@ const Sort: React.FC = () => {
   };
   const [open, setOpen] = React.useState(false);
 
-  const sortName: string[] = ['популярности', 'цене', 'алфавиту'];
+  const sortName: string[] = ['популярності', 'ціні', 'алфавіту'];
 
   React.useEffect(() => {
     const clickOutSide = (event: MouseEvent) => {
@@ -43,7 +43,7 @@ const Sort: React.FC = () => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортування за:</b>
         <span onClick={() => setOpen(!open)}>{sortName[sortID]}</span>
       </div>
       {open && (

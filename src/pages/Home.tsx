@@ -50,7 +50,7 @@ const Home: React.FC = () => {
         <Categories value={categoryID} onClickCategory={onClickCategory} />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">Всі піцци</h2>
       <div className="content__items">
         {status === 'loading'
           ? [...Array(6)].map((_, index) => <Skeleton key={index} />)

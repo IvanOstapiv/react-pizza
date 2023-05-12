@@ -75,9 +75,9 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl, title, type, sizes
               fill="white"
             />
           </svg>
-          <span>Добавить</span>
+          <span>Додати</span>
           {
-          isAdded && isAdded > 0 && <i>{isAdded}</i>}
+          isAdded > 0 && <i>{isAdded}</i>}
         </button>
       </div>
     </div>
