@@ -22,7 +22,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl, title, type, sizes
 
   const isAdded = cartItem ? cartItem.count : 0;
 
-  const onClickAddButton = () => {
+  const onClickAddButton =  () => {
     const item: CartItem = {
       id,
       title,

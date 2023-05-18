@@ -6,10 +6,13 @@ import styles from './Search.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, setSearchValue } from '../../redux/Slices/filterSlice';
 
-const SearchInput: React.FC = () => {
+type TProps = {
+  searchValue: string
+}
+
+const SearchInput: React.FC<TProps> = React.memo(({ searchValue }) => {
   const [value, setValue] = React.useState(''); //локальне змінення даних в пошуку
   const dispatch = useDispatch();
-  const { searchValue } = useSelector(selectFilter);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -75,6 +78,6 @@ const SearchInput: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SearchInput;

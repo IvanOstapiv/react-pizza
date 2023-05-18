@@ -2,23 +2,27 @@ import React from 'react';
 import { selectFilter, setSortID } from '../../redux/Slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Sort: React.FC = () => {
-  const { sortID } = useSelector(selectFilter);
+const sortName: string[] = ['популярністю', 'ціною', 'алфавітом'];
+
+type SortPopupProps = {
+  SortIdVal: number
+}
+
+const Sort: React.FC<SortPopupProps> = React.memo(({ SortIdVal }) => {
+  // const { sortID } = useSelector(selectFilter);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
+  console.log(111);
   
   const onClickPopup = (id: number) => {
     dispatch(setSortID(id));
   };
   const [open, setOpen] = React.useState(false);
 
-  const sortName: string[] = ['популярності', 'ціною', 'алфавітом'];
-
   React.useEffect(() => {
     const clickOutSide = (event: MouseEvent) => {
       if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
-        
       }
     };
 
@@ -43,13 +47,13 @@ const Sort: React.FC = () => {
           />
         </svg>
         <b>Сортування за:</b>
-        <span onClick={() => setOpen(!open)}>{sortName[sortID]}</span>
+        <span onClick={() => setOpen(!open)}>{sortName[SortIdVal]}</span>
       </div>
       {open && (
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
-              <li key={i} onClick={() => onClickPopup(i)} className={sortID == i ? 'active' : ''}>
+              <li key={i} onClick={() => onClickPopup(i)} className={SortIdVal == i ? 'active' : ''}>
                 {item}
               </li>
             ))}
@@ -58,6 +62,6 @@ const Sort: React.FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;

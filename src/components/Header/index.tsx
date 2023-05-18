@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
+import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart } from '../../redux/Slices/cartSlice';
 
 import SearchInput from '../SearchInput';
+import { selectFilter } from '../../redux/Slices/filterSlice';
 
 const Header: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart);
-
+  const { searchValue } = useSelector(selectFilter);
   const totalItem = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const isHome = useMatch('/');
 
   return (
     <div className="header">
@@ -23,8 +26,8 @@ const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-
-        <SearchInput />
+        
+        {isHome && <SearchInput searchValue={searchValue} />}
 
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
