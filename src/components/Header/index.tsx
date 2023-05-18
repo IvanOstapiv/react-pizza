@@ -13,6 +13,15 @@ const Header: React.FC = () => {
   const { searchValue } = useSelector(selectFilter);
   const totalItem = items.reduce((sum: number, item: any) => sum + item.count, 0);
   const isHome = useMatch('/');
+  const isMounted = React.useRef(false);
+
+  React.useEffect( () => {
+    if (isMounted.current){
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items])
 
   return (
     <div className="header">
@@ -26,7 +35,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        
+
         {isHome && <SearchInput searchValue={searchValue} />}
 
         <div className="header__cart">

@@ -27,14 +27,16 @@ const CartItemBlock: React.FC<CartItemProps> = ({
     dispatch(
       addItem({
         id,
+        type,
+        sizes,
       } as CartItem),
     );
   };
   const onClickMinus = () => {
-    count != 1 && dispatch(minusItem(id));
+    count != 1 && dispatch(minusItem({id,type,sizes} as CartItem));
   };
   const onClickRemove = () => {
-    dispatch(removeItem(id));
+    dispatch(removeItem({id,sizes,type} as CartItem));
   };
 
   return (

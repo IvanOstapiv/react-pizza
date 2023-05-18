@@ -12,13 +12,12 @@ type PizzaBlockProps = {
 }
 const typeName = ['тонкое', 'традиционное'];
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl, title, type, sizes, price }) => {
-  
-  const dispatch = useDispatch()
-  const cartItem = useSelector(selectItemsById(id))
-
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, type, sizes, price }) => {
   const [activeType, setActiveType] = React.useState<number>(0);
   const [activeSizes, setActiveSizes] = React.useState<number>(0);
+
+  const dispatch = useDispatch()
+  const cartItem = useSelector(selectItemsById(id, sizes[activeSizes], typeName[activeType]))
 
   const isAdded = cartItem ? cartItem.count : 0;
 

@@ -55,10 +55,10 @@ const Home: React.FC = () => {
               ? [...Array(6)].map((_, index) => <Skeleton key={index} />)
               : items
                   // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                  .map((pizza: any) => (
+                  .map((pizza: any, id: number) => (
                     <PizzaBlock
                       key={pizza.id}
-                      id={pizza.id}
+                      id={String(id)}
                       imageUrl={pizza.imageUrl}
                       title={pizza.title}
                       type={pizza.types}
