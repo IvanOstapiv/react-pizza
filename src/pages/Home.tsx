@@ -14,10 +14,10 @@ import { useAppDispatch } from '../redux/store';
 const Home: React.FC = () => {
   const { categoryID, sortID, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizza);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const onClickCategory = (id: number) => {
-    dispatch(setCategoryID(id)); //dispatch - заставляєм мінятися state categoryID
+    dispatch(setCategoryID(id)); //dispatch - заставляє змінювати state categoryID
   };
 
   const sortType: string[] = ['rating', 'price', 'title'];
@@ -26,8 +26,8 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      console.log('sort = ' + sortType[sortID]);
-      console.log('category = ' + categoryID);
+      // console.log('sort = ' + sortType[sortID]);
+      // console.log('category = ' + categoryID);
 
       dispatch(
         fetchPizzas({
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
         {status === 'loading'
           ? [...Array(6)].map((_, index) => <Skeleton key={index} />)
           : items
-              // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase())) 
+              // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
               .map((pizza: any) => (
                 <PizzaBlock
                   key={pizza.id}

@@ -3,8 +3,8 @@ import styles from './Pagination.module.scss';
 
 type PaginationProps = {
   value: number;
-  onClickPagination: (i: number) => void
-}
+  onClickPagination: (i: number) => void;
+};
 
 const Pagination: React.FC<PaginationProps> = ({ value, onClickPagination }) => {
   const paginElem: number[] = [1, 2, 3];
@@ -23,6 +23,6 @@ const Pagination: React.FC<PaginationProps> = ({ value, onClickPagination }) => 
       <li>&gt;</li>
     </ul>
   );
-}
+};
 
 export default Pagination;
