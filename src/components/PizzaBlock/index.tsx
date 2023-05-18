@@ -10,7 +10,7 @@ type PizzaBlockProps = {
   sizes: number[];
   price: number;
 }
-const typeName = ['тонкое', 'традиционное'];
+const typeName = ['Тонка', 'Традиційна'];
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, type, sizes, price }) => {
   const [activeType, setActiveType] = React.useState<number>(0);
