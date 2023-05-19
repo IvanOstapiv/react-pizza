@@ -16,7 +16,6 @@ export type CartItem = {
 interface CartSliceState {
   totalPrice: number;
   items: CartItem[];
-  id: any;
 }
 
 const { items, totalPrice } = getCartFromLS();
@@ -24,7 +23,6 @@ const { items, totalPrice } = getCartFromLS();
 const initialState: CartSliceState = {
   totalPrice,
   items,
-  id: [],
 };
 
 export const cartSlice = createSlice({
@@ -58,6 +56,7 @@ export const cartSlice = createSlice({
           obj.type !== action.payload.type ||
           obj.sizes !== action.payload.sizes,
       );
+
       state.totalPrice = calcTotalPrice(state.items);
     },
     clearItems: (state) => {

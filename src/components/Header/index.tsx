@@ -11,7 +11,7 @@ import { selectFilter } from '../../redux/Slices/filterSlice';
 const Header: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart);
   const { searchValue } = useSelector(selectFilter);
-  const totalItem = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalItem = items.reduce((sum: number, item) => sum + item.count, 0);
   const isHome = useMatch('/');
   const isMounted = React.useRef(false);
 

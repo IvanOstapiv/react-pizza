@@ -8,6 +8,10 @@ const NotFoundBlock: React.FC = () => {
     <div className={styles.root}>
       <div className={styles.contentBlock}>
         <h1>Сторінка не знайдена :( </h1>
+        <ul>
+          <h2>dasdasd</h2>
+          <li>dasdasdas</li>
+        </ul>
         <Link to="/">
           <button>Головна</button>
         </Link>

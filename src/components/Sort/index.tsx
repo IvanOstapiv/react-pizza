@@ -1,28 +1,36 @@
 import React from 'react';
-import { selectFilter, setSortID } from '../../redux/Slices/filterSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { setOrderID, setSortID } from '../../redux/Slices/filterSlice';
+import { useDispatch } from 'react-redux';
 
 const sortName: string[] = ['популярністю', 'ціною', 'алфавітом'];
+const orderName: string[] = ['asc', 'desc']
 
 type SortPopupProps = {
-  SortIdVal: number
+  SortIdVal: number;
+  orderID: number;
 }
 
-const Sort: React.FC<SortPopupProps> = React.memo(({ SortIdVal }) => {
-  // const { sortID } = useSelector(selectFilter);
+const Sort: React.FC<SortPopupProps> =({ SortIdVal, orderID }) => {
+
   const sortRef = React.useRef<HTMLDivElement>(null);
+
   const dispatch = useDispatch();
-  console.log(111);
   
   const onClickPopup = (id: number) => {
     dispatch(setSortID(id));
   };
-  const [open, setOpen] = React.useState(false);
+  const onClickPopupOrder = (id: number) => {
+    dispatch(setOrderID(id));
+  };
+
+  const [openSort, setOpenSort] = React.useState(false);
+  const [openOrder, setOrderSort] = React.useState(false);
 
   React.useEffect(() => {
     const clickOutSide = (event: MouseEvent) => {
       if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
-        setOpen(false);
+        setOpenSort(false);
+        setOrderSort(false);
       }
     };
 
@@ -46,10 +54,23 @@ const Sort: React.FC<SortPopupProps> = React.memo(({ SortIdVal }) => {
             fill="#2C2C2C"
           />
         </svg>
+
         <b>Сортування за:</b>
-        <span onClick={() => setOpen(!open)}>{sortName[SortIdVal]}</span>
+      <span onClick={() => setOrderSort(!openOrder)}>{orderName[orderID]}</span>
+      {openOrder && <div className="sort__order">
+          <ul>
+            {orderName.map((item, i) => (
+              <li key={i} onClick={() => onClickPopupOrder(i)} className={orderID == i ? 'active': ''}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>}
+
+        <b>Сортування за:</b>
+        <span onClick={() => setOpenSort(!openSort)}>{sortName[SortIdVal]}</span>
       </div>
-      {open && (
+      {openSort && (
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
@@ -62,6 +83,6 @@ const Sort: React.FC<SortPopupProps> = React.memo(({ SortIdVal }) => {
       )}
     </div>
   );
-});
+};
 
 export default Sort;

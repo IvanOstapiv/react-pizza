@@ -5,12 +5,14 @@ import { RootState } from '../store';
 export interface FilterSliceState {
     categoryID: number;
     sortID: number;
+    orderID: number;
     searchValue: string;
 }
 
 const initialState: FilterSliceState = {
     categoryID: 0,
     sortID: 0,
+    orderID: 0,
     searchValue: '',
   };
 
@@ -27,12 +29,15 @@ const filterSlice = createSlice({
         },
         setSearchValue(state, action: PayloadAction<string>){
             state.searchValue = action.payload
-        }
+        },
+        setOrderID(state, action: PayloadAction<number>){
+            state.orderID = action.payload
+        },
     }
 })
 
 export const selectFilter = (state: RootState) => state.filterReducer;
 
-export const {setCategoryID, setSortID, setSearchValue} = filterSlice.actions;
+export const {setCategoryID, setSortID, setSearchValue, setOrderID} = filterSlice.actions;
 
 export default filterSlice.reducer;

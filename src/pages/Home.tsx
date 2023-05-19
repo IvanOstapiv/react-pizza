@@ -12,9 +12,10 @@ import Pagination from '../components/Pagination';
 import { useAppDispatch } from '../redux/store';
 
 const sortType: string[] = ['rating', 'price', 'title'];
+const orderType: string[] = ['asc', 'desc'];
 
 const Home: React.FC = () => {
-  const { categoryID, sortID, searchValue } = useSelector(selectFilter);
+  const { categoryID, sortID, orderID, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizza);
   const dispatch = useAppDispatch();
 
@@ -25,21 +26,19 @@ const Home: React.FC = () => {
   const [selectPagination, setSelectPagination] = React.useState(0);
 
   React.useEffect(() => {
-    async function fetchData() {
-      dispatch(
-        fetchPizzas({
-          selectPagination,
-          categoryID,
-          sortID,
-          searchValue,
-          sortType,
-        }),
-      );
-    }
-
-    fetchData();
+    dispatch(
+      fetchPizzas({
+        selectPagination,
+        categoryID,
+        sortID,
+        orderID,
+        orderType,
+        searchValue,
+        sortType,
+      }),
+    );
     window.scroll(0, 0);
-  }, [categoryID, searchValue, sortID, selectPagination]);
+  }, [categoryID, searchValue, sortID, orderID, selectPagination]);
 
   return (
     <>
@@ -47,7 +46,7 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="content__top">
             <Categories value={categoryID} onClickCategory={onClickCategory} />
-            <Sort SortIdVal={sortID}/>
+            <Sort SortIdVal={sortID} orderID={orderID} />
           </div>
           <h2 className="content__title">Всі піцци</h2>
           <div className="content__items">
