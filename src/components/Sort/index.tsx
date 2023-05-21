@@ -3,19 +3,18 @@ import { setOrderID, setSortID } from '../../redux/Slices/filterSlice';
 import { useDispatch } from 'react-redux';
 
 const sortName: string[] = ['популярністю', 'ціною', 'алфавітом'];
-const orderName: string[] = ['asc', 'desc']
+const orderName: string[] = ['зростанням', 'спаданням'];
 
 type SortPopupProps = {
   SortIdVal: number;
   orderID: number;
-}
+};
 
-const Sort: React.FC<SortPopupProps> =({ SortIdVal, orderID }) => {
-
+const Sort: React.FC<SortPopupProps> = ({ SortIdVal, orderID }) => {
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
-  
+
   const onClickPopup = (id: number) => {
     dispatch(setSortID(id));
   };
@@ -56,16 +55,21 @@ const Sort: React.FC<SortPopupProps> =({ SortIdVal, orderID }) => {
         </svg>
 
         <b>Сортування за:</b>
-      <span onClick={() => setOrderSort(!openOrder)}>{orderName[orderID]}</span>
-      {openOrder && <div className="sort__order">
-          <ul>
-            {orderName.map((item, i) => (
-              <li key={i} onClick={() => onClickPopupOrder(i)} className={orderID == i ? 'active': ''}>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>}
+        <span onClick={() => setOrderSort(!openOrder)}>{orderName[orderID]}</span>
+        {openOrder && (
+          <div className="sort__order">
+            <ul>
+              {orderName.map((item, i) => (
+                <li
+                  key={i}
+                  onClick={() => onClickPopupOrder(i)}
+                  className={orderID == i ? 'active' : ''}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <b>Сортування за:</b>
         <span onClick={() => setOpenSort(!openSort)}>{sortName[SortIdVal]}</span>
@@ -74,7 +78,10 @@ const Sort: React.FC<SortPopupProps> =({ SortIdVal, orderID }) => {
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
-              <li key={i} onClick={() => onClickPopup(i)} className={SortIdVal == i ? 'active' : ''}>
+              <li
+                key={i}
+                onClick={() => onClickPopup(i)}
+                className={SortIdVal == i ? 'active' : ''}>
                 {item}
               </li>
             ))}
