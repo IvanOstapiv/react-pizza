@@ -1,37 +1,39 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, CartItem, selectItemsById } from '../../redux/Slices/cartSlice';
+import { PizzaItem } from '../../redux/Slices/pizzasSlice';
 
-type PizzaBlockProps = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  type: number[];
-  sizes: number[];
-  price: number;
-}
-const typeName = ['Тонка', 'Традиційна'];
+// type PizzaBlockProps = {
+//   id: string;
+//   imageUrl: string;
+//   title: string;
+//   type: number[];
+//   sizes: number[];
+//   price: number;
+// };
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, type, sizes, price }) => {
+// const typeName = ['Тонка', 'Традиційна'];
+
+const PizzaBlock: React.FC<PizzaItem> = ({ id, imageUrl, title, type, sizes, price }) => {
   const [activeType, setActiveType] = React.useState<number>(0);
   const [activeSizes, setActiveSizes] = React.useState<number>(0);
 
-  const dispatch = useDispatch()
-  const cartItem = useSelector(selectItemsById(id, sizes[activeSizes], typeName[activeType]))
+  const dispatch = useDispatch();
+  const cartItem = useSelector(selectItemsById(id, sizes[activeSizes], type[activeType]));
 
   const isAdded = cartItem ? cartItem.count : 0;
 
-  const onClickAddButton =  () => {
+  const onClickAddButton = () => {
     const item: CartItem = {
       id,
       title,
       imageUrl,
       price,
-      type: typeName[activeType],
+      type: type[activeType],
       sizes: sizes[activeSizes],
       count: 0,
-    }
-    dispatch(addItem(item))
+    };
+    dispatch(addItem(item));
   };
 
   return (
@@ -40,12 +42,12 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, type, size
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {type.map((typeId) => (
+          {type.map((string, i) => (
             <li
-              key={typeId}
-              onClick={() => setActiveType(typeId)}
-              className={activeType === typeId ? 'active' : ''}>
-              {typeName[typeId]}
+              key={i}
+              onClick={() => setActiveType(i)}
+              className={activeType === i ? 'active' : ''}>
+              {string}
             </li>
           ))}
         </ul>
@@ -75,12 +77,11 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, imageUrl, title, type, size
             />
           </svg>
           <span>Додати</span>
-          {
-          isAdded > 0 && <i>{isAdded}</i>}
+          {isAdded > 0 && <i>{isAdded}</i>}
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;

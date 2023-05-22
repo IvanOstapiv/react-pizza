@@ -3,11 +3,11 @@ import axios from 'axios';
 import { RootState } from '../store';
 import { FilterSliceState } from './filterSlice';
 
-type PizzaItem = {
+export type PizzaItem = {
   id: string;
   imageUrl: string;
   title: string;
-  type: number[];
+  type: string[];
   sizes: number[];
   price: number;
 }
@@ -20,11 +20,13 @@ export enum Status {  // export для майбутнього використа
 
 interface PizzaSliceState {
   items: PizzaItem[];
-  status: Status
+  status: Status;
+  selectPagination: number;
 }
 
 const initialState: PizzaSliceState = {
   items: [],
+  selectPagination: 0,
   status: Status.LOADING, // loading || success || error
 };
 
@@ -36,7 +38,7 @@ export const fetchPizzas = createAsyncThunk<PizzaItem[], FilterSliceState & {
 }>('pizzas/fetchPizzasStatus', async (params) => {
   const { selectPagination, categoryID, sortType, sortID, orderType, orderID, searchValue} = params;
   const { data } = await axios.get<PizzaItem[]>(
-    `https://63f91d13a4ec283e998277c9.mockapi.io/items?page=${selectPagination+1}&limit=4&${
+    `https://63f91d13a4ec283e998277c9.mockapi.io/items?page=${selectPagination+1}&${
       categoryID > 0 ? `category=${categoryID}` : ''
     }&sortBy=${sortType[sortID]}&order=${orderType[orderID]}&search=${searchValue}`
   );
@@ -49,6 +51,9 @@ export const pizzasSlice = createSlice({
   reducers: {
     setItems: (state, action: PayloadAction<PizzaItem[]>) => {
       state.items = action.payload;
+    },
+    setSelectPagination: (state, action: PayloadAction<number>) => {
+      state.selectPagination = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -69,6 +74,6 @@ export const pizzasSlice = createSlice({
 
 export const selectPizza = (state: RootState) => state.pizzasReducer
 
-export const { setItems } = pizzasSlice.actions;
+export const { setItems, setSelectPagination } = pizzasSlice.actions;
 
 export default pizzasSlice.reducer;

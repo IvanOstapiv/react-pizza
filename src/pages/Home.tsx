@@ -16,16 +16,16 @@ const orderType: string[] = ['asc', 'desc'];
 
 const Home: React.FC = () => {
   const { categoryID, sortID, orderID, searchValue } = useSelector(selectFilter);
-  const { items, status } = useSelector(selectPizza);
+  const { items, status, selectPagination } = useSelector(selectPizza);
   const dispatch = useAppDispatch();
-
+  const CountPage = items.length;
+  
   const onClickCategory = React.useCallback((id: number) => {
     dispatch(setCategoryID(id));
   }, []);
 
-  const [selectPagination, setSelectPagination] = React.useState(0);
-
   React.useEffect(() => {
+
     dispatch(
       fetchPizzas({
         selectPagination,
@@ -36,8 +36,8 @@ const Home: React.FC = () => {
         searchValue,
         sortType,
       }),
-    );
-    window.scroll(0, 0);
+    ); 
+    // window.scroll(0, 0);
   }, [categoryID, searchValue, sortID, orderID, selectPagination]);
 
   return (
@@ -54,22 +54,19 @@ const Home: React.FC = () => {
               ? [...Array(6)].map((_, index) => <Skeleton key={index} />)
               : items
                   // .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                  .map((pizza: any, id: number) => (
+                  .map((pizza, id: number) => (
                     <PizzaBlock
                       key={pizza.id}
                       id={String(id)}
                       imageUrl={pizza.imageUrl}
                       title={pizza.title}
-                      type={pizza.types}
+                      type={pizza.type}
                       sizes={pizza.sizes}
                       price={pizza.price}
                     />
                   ))}
           </div>
-          <Pagination
-            value={selectPagination}
-            onClickPagination={(id: number) => setSelectPagination(id)}
-          />
+          {/* <Pagination selectPagination={selectPagination} countPage={CountPage}/> */}
         </div>
       </div>
     </>
