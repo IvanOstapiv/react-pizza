@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useMatch } from 'react-router-dom';
-import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart } from '../../redux/Slices/cartSlice';
@@ -30,8 +29,8 @@ const Header: React.FC = () => {
           <div className="header__logo">
             <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
             <div>
-              <h1>React Pizza</h1>
-              <p>Найкраща піцца</p>
+              <h1>Pizza</h1>
+              <p>найкраща тільки у нас</p>
             </div>
           </div>
         </Link>

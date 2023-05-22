@@ -18,7 +18,6 @@ const Home: React.FC = () => {
   const { categoryID, sortID, orderID, searchValue } = useSelector(selectFilter);
   const { items, status, selectPagination } = useSelector(selectPizza);
   const dispatch = useAppDispatch();
-  const CountPage = items.length;
   
   const onClickCategory = React.useCallback((id: number) => {
     dispatch(setCategoryID(id));
